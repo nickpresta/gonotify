@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gonotify Example</title>
+    <style>
+      #header{position:fixed}
+      #info,#results{border:1px solid #000}
+      #info{max-height:200px;overflow:scroll}
+      #results{max-height:300px;overflow:scroll}
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Gonotify</h1>
+      <div id="info"></div>
+    </header>
+    <h2>Messages</h2>
+    <ul id="results"></ul>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+      $(function() {
+        if ("WebSocket" in window) {
+          connection = new WebSocket("ws://localhost:{{.Port}}/websocket/mailbox/{{.Mailbox | urlquery }}");
+          connection.onclose = function() {
+            var date = new Date().toUTCString()
+            $("#info").append("<p style='color:red'><strong>"+date+"</strong>: Connection closed</p>");
+          };
+          connection.onopen = function() {
+            var date = new Date().toUTCString()
+            $("#info").append("<p style='color:green'><strong>"+date+"</strong>: Connection established</p>");
+          };
+          connection.onmessage = function(messageEvt) {
+            console.log(messageEvt);
+            var date = new Date().toUTCString()
+            $("#info").append("<p><strong>"+date+"</strong>: Message received</p>");
+            $("#results").append("<li>" + messageEvt.data + "</li>");
+          };
+          // Not sure why this isn't working...
+          window.onbeforeunload = function() {
+            alert("BYE");
+            connection.onclose = function () {}; // disable onclose handler first
+            connection.close()
+            setTimeout(function() {}, 3000); // sleep for a bit to be sure
+          };
+        } else {
+          alert('Your browser does not support WebSockets');
+        }
+      });
+    </script>
+  </body>
+</html>

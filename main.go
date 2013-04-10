@@ -1,15 +1,16 @@
 package main
 
 import (
-	"code.google.com/p/go.net/websocket"
 	"flag"
 	"fmt"
-	"github.com/gorilla/mux"
-	"github.com/nickpresta/gonotify/dispatch"
 	"html/template"
 	"log"
 	"net/http"
 	"runtime"
+
+	"code.google.com/p/go.net/websocket"
+	"github.com/gorilla/mux"
+	"github.com/nickpresta/gonotify/dispatch"
 )
 
 var (

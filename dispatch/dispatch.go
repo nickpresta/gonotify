@@ -2,6 +2,7 @@ package dispatch
 
 import (
 	"log"
+
 	"github.com/nickpresta/gonotify/mailbox"
 )
 

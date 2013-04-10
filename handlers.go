@@ -1,14 +1,15 @@
 package main
 
 import (
-	"code.google.com/p/go.net/websocket"
 	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
-	"github.com/nickpresta/gonotify/dispatch"
-	"github.com/nickpresta/gonotify/mailbox"
 	"io/ioutil"
 	"net/http"
+
+	"code.google.com/p/go.net/websocket"
+	"github.com/nickpresta/gonotify/dispatch"
+	"github.com/nickpresta/gonotify/mailbox"
 )
 
 type JSONPostData struct {

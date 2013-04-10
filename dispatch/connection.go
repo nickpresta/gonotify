@@ -1,10 +1,11 @@
 package dispatch
 
 import (
-	"code.google.com/p/go.net/websocket"
-	"github.com/nickpresta/gonotify/mailbox"
 	"log"
 	"time"
+
+	"code.google.com/p/go.net/websocket"
+	"github.com/nickpresta/gonotify/mailbox"
 )
 
 // A connection to a client, a channel for sending a message, and a Mailbox

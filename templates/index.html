@@ -20,8 +20,9 @@
     <script>
       $(function() {
         if ("WebSocket" in window) {
-          connection = new WebSocket("ws://localhost:{{.Port}}/websocket/mailbox/{{.Mailbox | urlquery }}");
-          connection.onclose = function() {
+          var connection = new WebSocket("ws://localhost:{{.Port}}/websocket/mailbox/{{.Mailbox | urlquery }}");
+          connection.onclose = function(e) {
+            console.log(e);
             var date = new Date().toUTCString()
             $("#info").append("<p style='color:red'><strong>"+date+"</strong>: Connection closed</p>");
           };
@@ -34,13 +35,6 @@
             var date = new Date().toUTCString()
             $("#info").append("<p><strong>"+date+"</strong>: Message received</p>");
             $("#results").append("<li>" + messageEvt.data + "</li>");
-          };
-          // Not sure why this isn't working...
-          window.onbeforeunload = function() {
-            alert("BYE");
-            connection.onclose = function () {}; // disable onclose handler first
-            connection.close()
-            setTimeout(function() {}, 3000); // sleep for a bit to be sure
           };
         } else {
           alert('Your browser does not support WebSockets');

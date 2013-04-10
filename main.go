@@ -40,7 +40,7 @@ func main() {
 	router.Handle("/websocket/mailbox/{mailbox}", websocket.Handler(websocketRequestHandler))
 
 	http.Handle("/", router)
-	if err := http.ListenAndServe(fmt.Sprintf(":%d", *port), nil); err != nil {
+	if err := http.ListenAndServeTLS(fmt.Sprintf(":%d", *port), "cert.pem", "key.pem", nil); err != nil {
 		log.Fatal(err)
 	}
 }

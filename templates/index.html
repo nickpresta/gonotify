@@ -20,7 +20,7 @@
     <script>
       $(function() {
         if ("WebSocket" in window) {
-          var connection = new WebSocket("ws://localhost:{{.Port}}/websocket/mailbox/{{.Mailbox | urlquery }}");
+          var connection = new WebSocket("wss://localhost:{{.Port}}/websocket/mailbox/{{.Mailbox | urlquery }}");
           connection.onclose = function(e) {
             console.log(e);
             var date = new Date().toUTCString()

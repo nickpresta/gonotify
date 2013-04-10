@@ -22,9 +22,9 @@ It accepts messages via HTTP and relays them to clients connected via WebSocket.
 ### To send data
 * Send a `POST` request to `http://localhost:8080/send` with a JSON payload looking like:
 
-    {
-        "mailbox": "nickp",
-        "message": "hello!"
-    }
+        {
+            "mailbox": "nickp",
+            "message": "hello!"
+        }
 
-The mailbox should receive the message and show up on the client's screen.
+* The mailbox should receive the message and show up on the client's screen.

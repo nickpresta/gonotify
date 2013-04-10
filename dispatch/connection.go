@@ -7,14 +7,14 @@ import (
 	"time"
 )
 
-// A connection to a client
+// A connection to a client, a channel for sending a message, and a Mailbox
 type Connection struct {
 	WebSocket   *websocket.Conn
 	Send chan string
 	Mailbox *mailbox.Mailbox
 }
 
-type JSONMessage struct {
+type jsonMessage struct {
 	Date    string `json:"date"`
 	Message string `json:"message"`
 }
@@ -43,7 +43,7 @@ WriteLoop:
 		select {
 		case message := <-c.Send:
 			now := time.Now().Format(time.UnixDate)
-			jsonMessage := JSONMessage{
+			jsonMessage := jsonMessage{
 				Date:    now,
 				Message: message,
 			}

@@ -52,7 +52,7 @@ WriteLoop:
 				break
 			}
 		case <-ping.C:
-			log.Printf("Pinging: %v\n", c.Mailbox.Receiver)
+			log.Printf("Pinging: %v (Connection: %p)\n", c.Mailbox.Receiver, c)
 			if !c.isAlive() {
 				break WriteLoop
 			}
@@ -60,5 +60,4 @@ WriteLoop:
 	}
 	ping.Stop()
 	dispatcher.Unregister <- c
-	c.WebSocket.Close()
 }

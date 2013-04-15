@@ -16,11 +16,11 @@
     </header>
     <h2>Messages</h2>
     <ul id="results"></ul>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="/static/jquery.min.js"></script>
     <script>
       $(function() {
         if ("WebSocket" in window) {
-          var connection = new WebSocket("wss://localhost:{{.Port}}/websocket/mailbox/{{.Mailbox | urlquery }}");
+          var connection = new WebSocket("wss://"+document.location.hostname+":{{.Port}}/websocket/mailbox/{{.Mailbox | urlquery }}");
           connection.onclose = function(e) {
             console.log(e);
             var date = new Date().toUTCString()
@@ -35,6 +35,9 @@
             var date = new Date().toUTCString()
             $("#info").append("<p><strong>"+date+"</strong>: Message received</p>");
             $("#results").append("<li>" + messageEvt.data + "</li>");
+          };
+          connection.onerror = function(error) {
+            console.log(error)
           };
         } else {
           alert('Your browser does not support WebSockets');

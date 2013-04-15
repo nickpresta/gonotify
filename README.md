@@ -4,12 +4,10 @@ Gonotify is a proof of concept notification server.
 ![Powered by Gophers](http://i.imgur.com/SwkPj.png "Powered by Gophers")
 
 ## How to run
-1. Build gonotify: `go get github.com/nickpresta/gonotify`
-2. Run gonotify: `go install github.com/nickpresta/gonotify`
+1. Get gonotify: `go get github.com/nickpresta/gonotify`
+2. Build gonotify: `go build github.com/nickpresta/gonotify`
 
-You should now have a binary, `gonotify`, in your `$GOPATH/bin` directory.
-
-See `gonotify --help` for available options.
+You should now have a binary, `gonotify`. See `gonotify --help` for available options.
 
 ## How to interact
 Gonotify is an HTTP and WebSocket server.
